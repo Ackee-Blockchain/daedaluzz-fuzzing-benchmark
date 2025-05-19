@@ -29,6 +29,8 @@ elif fuzzer_name == "hybrid-echidna":
     docker_image = "hybrid-echidna:v0.0.2"
 elif fuzzer_name == "ityfuzz":
     docker_image = "fuzzland/ityfuzz:v0.0.1"
+elif fuzzer_name == "wake":
+    docker_image = "daedaluzz-wake"
 time_limit = 28800
 include_raw_output = False
 maze_id_start = 0
@@ -133,6 +135,22 @@ def process_all_tasks(tasks):
                             f"{docker_image}",
                             f"{task_idx} {time_limit} {maze_id} {rnd_seed}",
                         ]
+                    elif fuzzer_name == "wake":
+                        wd = os.getcwd()
+                        exe = [
+                            "docker",
+                            "run",
+                            "--rm",
+                            "-i",
+                            f"--cpuset-cpus={core_id}",
+                            f"--memory={memory_limit}m",
+                            f"--memory-swap={memory_limit}m",
+                            f"--mount=type=bind,source={wd},target=/daedaluzz",
+                            "--workdir=/daedaluzz",
+                            '--entrypoint="./run-wake.sh"',
+                            f"{docker_image}",
+                            f"{task_idx} {time_limit} {maze_id} {rnd_seed}",
+                        ]
                     elif fuzzer_name == "hybrid-echidna":
                         wd = os.getcwd()
                         exe = [
@@ -203,6 +221,7 @@ def process_all_tasks(tasks):
                 elif (
                     fuzzer_name == "echidna"
                     or fuzzer_name == "foundry"
+                    or fuzzer_name == "wake"
                     or fuzzer_name == "hybrid-echidna"
                     or fuzzer_name == "ityfuzz"
                 ):
@@ -256,6 +275,15 @@ def process_all_tasks(tasks):
                 )
                 for m in ms:
                     violations[m] = duration
+            elif fuzzer_name == "wake":
+                duration = time.time_ns() - task["start-time"]
+                violations = dict({})
+                sets = re.findall(r'\{[0-9, ]+\}', fuzzer_output)
+                if sets:
+                    last_set = sets[-1]
+                    numbers = [int(n) for n in re.findall(r'\d+', last_set)]
+                    for num in numbers:
+                        violations[str(num)] = duration
             elif fuzzer_name == "foundry":
                 duration = time.time_ns() - task["start-time"]
                 violations = dict({})

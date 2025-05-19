@@ -12,6 +12,7 @@ docker pull ghcr.io/foundry-rs/foundry:nightly-71f9b8e645abc24da099912ce4d4ce481
 docker pull ghcr.io/crytic/echidna/echidna:v2.0.4
 docker pull fuzzland/ityfuzz:v0.0.1
 docker build --rm -t "hybrid-echidna:v0.0.2" -f Dockerfile.optik .
+docker build --rm -t daedaluzz-wake -f Dockerfile.wake .
 # rm -rf optic-tmp
 # git clone https://github.com/crytic/optik.git optic-tmp
 # cd optic-tmp
@@ -22,5 +23,6 @@ docker build --rm -t "hybrid-echidna:v0.0.2" -f Dockerfile.optik .
 python3 run-campaigns.py --fuzzer-name harvey
 python3 run-campaigns.py --fuzzer-name echidna
 python3 run-campaigns.py --fuzzer-name foundry
+python3 run-campaigns.py --fuzzer-name wake
 python3 run-campaigns.py --fuzzer-name hybrid-echidna
 python3 run-campaigns.py --fuzzer-name ityfuzz

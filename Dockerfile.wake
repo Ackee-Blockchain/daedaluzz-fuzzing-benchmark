@@ -1,0 +1,58 @@
+# Use Ubuntu latest as the base image
+FROM ubuntu:latest
+
+# Create a workspace directory
+WORKDIR /daedaluzz
+
+# Install basic utilities and Python
+RUN apt-get update && apt-get install -y \
+    curl \
+    git \
+    python3 \
+    python3-pip \
+    python3-venv \
+    pipx \
+    build-essential \
+    libssl-dev \
+    pkg-config \
+    libatomic1 \
+    patchelf \
+    vim \
+    openssh-client \
+    && rm -rf /var/lib/apt/lists/*
+
+# pipx ensurepath
+RUN pipx ensurepath
+
+# Add local bin to PATH for pipx
+ENV PATH="/root/.local/bin:${PATH}"
+
+# Install Rust
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+ENV PATH="/root/.cargo/bin:${PATH}"
+
+# Install maturin through pipx
+RUN pipx install maturin
+
+# Create and activate virtual environment
+RUN python3 -m venv /venv
+ENV VIRTUAL_ENV=/venv
+ENV PATH="$VIRTUAL_ENV/bin:$PATH"
+
+# Setup SSH
+RUN mkdir -p -m 0600 ~/.ssh && \
+    ssh-keyscan -H github.com >> ~/.ssh/known_hosts
+
+# Clone Wake 5.0
+RUN git clone -b feat/version-5.0.0 https://github.com/Ackee-Blockchain/wake.git /wake
+
+# Set working directory for wake-rs and run maturin develop
+WORKDIR /wake/wake_rs
+RUN maturin develop --release
+
+# Install Wake
+WORKDIR /wake
+RUN pip install -e .
+
+# Set working directory back to daedaluzz
+WORKDIR /daedaluzz
