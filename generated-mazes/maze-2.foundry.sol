@@ -1021,52 +1021,52 @@ contract TestMaze is Test {
   function setUp() external {
     m = new Maze();
   }
-  function invariant_1() external { if (m.found(1)) { fail("1"); } }
-  function invariant_2() external { if (m.found(2)) { fail("2"); } }
-  function invariant_3() external { if (m.found(3)) { fail("3"); } }
-  function invariant_4() external { if (m.found(4)) { fail("4"); } }
-  function invariant_5() external { if (m.found(5)) { fail("5"); } }
-  function invariant_6() external { if (m.found(6)) { fail("6"); } }
-  function invariant_7() external { if (m.found(7)) { fail("7"); } }
-  function invariant_8() external { if (m.found(8)) { fail("8"); } }
-  function invariant_9() external { if (m.found(9)) { fail("9"); } }
-  function invariant_10() external { if (m.found(10)) { fail("10"); } }
-  function invariant_11() external { if (m.found(11)) { fail("11"); } }
-  function invariant_12() external { if (m.found(12)) { fail("12"); } }
-  function invariant_13() external { if (m.found(13)) { fail("13"); } }
-  function invariant_14() external { if (m.found(14)) { fail("14"); } }
-  function invariant_15() external { if (m.found(15)) { fail("15"); } }
-  function invariant_16() external { if (m.found(16)) { fail("16"); } }
-  function invariant_17() external { if (m.found(17)) { fail("17"); } }
-  function invariant_18() external { if (m.found(18)) { fail("18"); } }
-  function invariant_19() external { if (m.found(19)) { fail("19"); } }
-  function invariant_20() external { if (m.found(20)) { fail("20"); } }
-  function invariant_21() external { if (m.found(21)) { fail("21"); } }
-  function invariant_22() external { if (m.found(22)) { fail("22"); } }
-  function invariant_23() external { if (m.found(23)) { fail("23"); } }
-  function invariant_24() external { if (m.found(24)) { fail("24"); } }
-  function invariant_25() external { if (m.found(25)) { fail("25"); } }
-  function invariant_26() external { if (m.found(26)) { fail("26"); } }
-  function invariant_27() external { if (m.found(27)) { fail("27"); } }
-  function invariant_28() external { if (m.found(28)) { fail("28"); } }
-  function invariant_29() external { if (m.found(29)) { fail("29"); } }
-  function invariant_30() external { if (m.found(30)) { fail("30"); } }
-  function invariant_31() external { if (m.found(31)) { fail("31"); } }
-  function invariant_32() external { if (m.found(32)) { fail("32"); } }
-  function invariant_33() external { if (m.found(33)) { fail("33"); } }
-  function invariant_34() external { if (m.found(34)) { fail("34"); } }
-  function invariant_35() external { if (m.found(35)) { fail("35"); } }
-  function invariant_36() external { if (m.found(36)) { fail("36"); } }
-  function invariant_37() external { if (m.found(37)) { fail("37"); } }
-  function invariant_38() external { if (m.found(38)) { fail("38"); } }
-  function invariant_39() external { if (m.found(39)) { fail("39"); } }
-  function invariant_40() external { if (m.found(40)) { fail("40"); } }
-  function invariant_41() external { if (m.found(41)) { fail("41"); } }
-  function invariant_42() external { if (m.found(42)) { fail("42"); } }
-  function invariant_43() external { if (m.found(43)) { fail("43"); } }
-  function invariant_44() external { if (m.found(44)) { fail("44"); } }
-  function invariant_45() external { if (m.found(45)) { fail("45"); } }
-  function invariant_46() external { if (m.found(46)) { fail("46"); } }
-  function invariant_47() external { if (m.found(47)) { fail("47"); } }
-  function invariant_48() external { if (m.found(48)) { fail("48"); } }
+  function invariant_1() external { if (m.found(1)) { assertTrue(false, "1"); } }
+  function invariant_2() external { if (m.found(2)) { assertTrue(false, "2"); } }
+  function invariant_3() external { if (m.found(3)) { assertTrue(false, "3"); } }
+  function invariant_4() external { if (m.found(4)) { assertTrue(false, "4"); } }
+  function invariant_5() external { if (m.found(5)) { assertTrue(false, "5"); } }
+  function invariant_6() external { if (m.found(6)) { assertTrue(false, "6"); } }
+  function invariant_7() external { if (m.found(7)) { assertTrue(false, "7"); } }
+  function invariant_8() external { if (m.found(8)) { assertTrue(false, "8"); } }
+  function invariant_9() external { if (m.found(9)) { assertTrue(false, "9"); } }
+  function invariant_10() external { if (m.found(10)) { assertTrue(false, "10"); } }
+  function invariant_11() external { if (m.found(11)) { assertTrue(false, "11"); } }
+  function invariant_12() external { if (m.found(12)) { assertTrue(false, "12"); } }
+  function invariant_13() external { if (m.found(13)) { assertTrue(false, "13"); } }
+  function invariant_14() external { if (m.found(14)) { assertTrue(false, "14"); } }
+  function invariant_15() external { if (m.found(15)) { assertTrue(false, "15"); } }
+  function invariant_16() external { if (m.found(16)) { assertTrue(false, "16"); } }
+  function invariant_17() external { if (m.found(17)) { assertTrue(false, "17"); } }
+  function invariant_18() external { if (m.found(18)) { assertTrue(false, "18"); } }
+  function invariant_19() external { if (m.found(19)) { assertTrue(false, "19"); } }
+  function invariant_20() external { if (m.found(20)) { assertTrue(false, "20"); } }
+  function invariant_21() external { if (m.found(21)) { assertTrue(false, "21"); } }
+  function invariant_22() external { if (m.found(22)) { assertTrue(false, "22"); } }
+  function invariant_23() external { if (m.found(23)) { assertTrue(false, "23"); } }
+  function invariant_24() external { if (m.found(24)) { assertTrue(false, "24"); } }
+  function invariant_25() external { if (m.found(25)) { assertTrue(false, "25"); } }
+  function invariant_26() external { if (m.found(26)) { assertTrue(false, "26"); } }
+  function invariant_27() external { if (m.found(27)) { assertTrue(false, "27"); } }
+  function invariant_28() external { if (m.found(28)) { assertTrue(false, "28"); } }
+  function invariant_29() external { if (m.found(29)) { assertTrue(false, "29"); } }
+  function invariant_30() external { if (m.found(30)) { assertTrue(false, "30"); } }
+  function invariant_31() external { if (m.found(31)) { assertTrue(false, "31"); } }
+  function invariant_32() external { if (m.found(32)) { assertTrue(false, "32"); } }
+  function invariant_33() external { if (m.found(33)) { assertTrue(false, "33"); } }
+  function invariant_34() external { if (m.found(34)) { assertTrue(false, "34"); } }
+  function invariant_35() external { if (m.found(35)) { assertTrue(false, "35"); } }
+  function invariant_36() external { if (m.found(36)) { assertTrue(false, "36"); } }
+  function invariant_37() external { if (m.found(37)) { assertTrue(false, "37"); } }
+  function invariant_38() external { if (m.found(38)) { assertTrue(false, "38"); } }
+  function invariant_39() external { if (m.found(39)) { assertTrue(false, "39"); } }
+  function invariant_40() external { if (m.found(40)) { assertTrue(false, "40"); } }
+  function invariant_41() external { if (m.found(41)) { assertTrue(false, "41"); } }
+  function invariant_42() external { if (m.found(42)) { assertTrue(false, "42"); } }
+  function invariant_43() external { if (m.found(43)) { assertTrue(false, "43"); } }
+  function invariant_44() external { if (m.found(44)) { assertTrue(false, "44"); } }
+  function invariant_45() external { if (m.found(45)) { assertTrue(false, "45"); } }
+  function invariant_46() external { if (m.found(46)) { assertTrue(false, "46"); } }
+  function invariant_47() external { if (m.found(47)) { assertTrue(false, "47"); } }
+  function invariant_48() external { if (m.found(48)) { assertTrue(false, "48"); } }
 }

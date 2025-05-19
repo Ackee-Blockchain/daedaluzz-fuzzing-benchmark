@@ -1,7 +1,7 @@
-#!/bin/ash
+#!/bin/bash
 cd /daedaluzz
 rm -rf foundry-tmp/task-$1
-mkdir foundry-tmp/task-$1
+mkdir -p foundry-tmp/task-$1
 cd foundry-tmp/task-$1
 forge init --no-git foundry-project
 cd foundry-project

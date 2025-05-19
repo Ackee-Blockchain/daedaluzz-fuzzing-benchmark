@@ -24,7 +24,7 @@ fuzzer_exe = "../harvey-cli/harvey-cli"
 if fuzzer_name == "echidna":
     docker_image = "ghcr.io/crytic/echidna/echidna:v2.1.1"
 elif fuzzer_name == "foundry":
-    docker_image = "ghcr.io/foundry-rs/foundry@sha256:e3ba202249cccdffafc0d0e90c43baca8f03e4b0d7e273c0d33b8a5e3cea1eb7"
+    docker_image = "ghcr.io/foundry-rs/foundry:nightly-71f9b8e645abc24da099912ce4d4ce481d26ffad@sha256:7c64c44ca2bfe36bf6108eb9f7bf29034b1b39ee95aa3c29b0d29768996c82ec"
 elif fuzzer_name == "hybrid-echidna":
     docker_image = "hybrid-echidna:v0.0.2"
 elif fuzzer_name == "ityfuzz":
@@ -281,7 +281,7 @@ def process_all_tasks(tasks):
                         if m:
                             dur = int(m[1]) - start_timestamp
                     ms = re.findall(
-                        r"\[FAIL\. Reason: Assertion failed\.\].*? invariant_(\d+)",
+                        r"\[FAIL: invariant_(\d+)",
                         out,
                         flags=re.M | re.S,
                     )
