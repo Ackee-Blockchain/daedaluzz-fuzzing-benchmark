@@ -22,7 +22,7 @@ fuzzer_name = args.fuzzer_name
 docker_image = "harvey-cli:0.0.113"
 fuzzer_exe = "../harvey-cli/harvey-cli"
 if fuzzer_name == "echidna":
-    docker_image = "ghcr.io/crytic/echidna/echidna:v2.1.1"
+    docker_image = "ghcr.io/crytic/echidna/echidna:v2.2.6"
 elif fuzzer_name == "foundry":
     docker_image = "ghcr.io/foundry-rs/foundry:v1.2.0"
 elif fuzzer_name == "hybrid-echidna":

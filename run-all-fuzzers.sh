@@ -7,7 +7,7 @@ rm -rf hybrid-echidna-tmp
 mkdir hybrid-echidna-tmp
 rm -rf ityfuzz-tmp
 mkdir ityfuzz-tmp
-docker pull ghcr.io/crytic/echidna/echidna:v2.1.1
+docker pull ghcr.io/crytic/echidna/echidna:v2.2.6
 docker pull ghcr.io/foundry-rs/foundry:v1.2.0
 docker pull ghcr.io/crytic/echidna/echidna:v2.0.4
 docker pull fuzzland/ityfuzz:v0.0.1
