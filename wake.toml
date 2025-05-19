@@ -1,0 +1,5 @@
+[compiler.solc]
+exclude_paths = ["foundry-tmp", "foundry-project"]
+
+[testing]
+cmd = "revm"
