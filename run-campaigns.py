@@ -309,7 +309,7 @@ def process_all_tasks(tasks):
                         if m:
                             dur = int(m[1]) - start_timestamp
                     ms = re.findall(
-                        r"\[FAIL: invariant_(\d+)",
+                        r"\[FAIL: (\d+)",
                         out,
                         flags=re.M | re.S,
                     )
