@@ -3,10 +3,6 @@ from wake.testing.fuzzing import *
 
 from pytypes.generatedmazes.maze2_wake import Maze
 
-def random_uint64() -> int:
-    bits = random.randint(1, 64)
-    return random.getrandbits(bits)
-
 
 discovered = set()
 
@@ -19,24 +15,24 @@ class Maze2FuzzTest(FuzzTest):
 
 
     @flow()
-    def flow_move_north(self) -> None:
+    def flow_move_north(self, p0: uint64, p1: uint64, p2: uint64, p3: uint64, p4: uint64, p5: uint64, p6: uint64, p7: uint64) -> None:
         with may_revert():
-            tx = self.maze.moveNorth(*[random_uint64() for _ in range(8)])
+            tx = self.maze.moveNorth(p0, p1, p2, p3, p4, p5, p6, p7)
 
     @flow()
-    def flow_move_south(self) -> None:
+    def flow_move_south(self, p0: uint64, p1: uint64, p2: uint64, p3: uint64, p4: uint64, p5: uint64, p6: uint64, p7: uint64) -> None:
         with may_revert():
-            tx = self.maze.moveSouth(*[random_uint64() for _ in range(8)])
+            tx = self.maze.moveSouth(p0, p1, p2, p3, p4, p5, p6, p7)
 
     @flow()
-    def flow_move_east(self) -> None:
+    def flow_move_east(self, p0: uint64, p1: uint64, p2: uint64, p3: uint64, p4: uint64, p5: uint64, p6: uint64, p7: uint64) -> None:
         with may_revert():
-            tx = self.maze.moveEast(*[random_uint64() for _ in range(8)])
+            tx = self.maze.moveEast(p0, p1, p2, p3, p4, p5, p6, p7)
 
     @flow()
-    def flow_move_west(self) -> None:
+    def flow_move_west(self, p0: uint64, p1: uint64, p2: uint64, p3: uint64, p4: uint64, p5: uint64, p6: uint64, p7: uint64) -> None:
         with may_revert():
-            tx = self.maze.moveWest(*[random_uint64() for _ in range(8)])
+            tx = self.maze.moveWest(p0, p1, p2, p3, p4, p5, p6, p7)
 
     @invariant(period=100)
     def invariant_found(self) -> None:
