@@ -37,6 +37,20 @@ The repository also includes infrastructure (for instance, scripts and Dockerfil
 The `run-all-fuzzers.sh` script can be used to benchmark the above fuzzers, and the `show-stats.py` script can be used to aggregate and visualize the results.
 
 
+## Results
+
+The following results show the number of assertion violations found by each fuzzer on the pregenerated mazes in the `generated-mazes` directory. All runs were conducted for 20 minutes using 1 CPU.
+
+| Benchmark | Echidna | Foundry | Wake + Anvil | Wake-rs |
+|-----------|---------|---------|--------------|---------|
+| Maze0     | 11      | 10      | 9            | **15**  |
+| Maze1     | 11      | 11      | 10           | **12**  |
+| Maze2     | **16**  | 14      | 12           | 15      |
+| Maze3     | 12      | 10      | 8            | **13**  |
+| Maze4     | 14      | 13      | 12           | **16**  |
+| **Sum**   |   64    |   58    |   51         | **71**  |
+
+
 ## Frequently Asked Questions
 
 #### Why do the generated benchmarks use inputs of type `uint64`?
