@@ -3,7 +3,7 @@ cd /daedaluzz
 solc-select install 0.8.19
 solc-select use 0.8.19
 rm -rf echidna-tmp/task-$1
-mkdir echidna-tmp/task-$1
+mkdir -p echidna-tmp/task-$1
 cd echidna-tmp/task-$1
 rm -rf echidna-corpus
 mkdir echidna-corpus
