@@ -10,4 +10,4 @@ if [ $((${#SEED_HEX} % 2)) -eq 1 ]; then
     SEED_HEX="0$SEED_HEX"
 fi
 
-timeout $2 wake test tests/test_maze$3.py --seed $SEED_HEX
+timeout -s INT $2 wake test tests/test_maze$3.py --seed $SEED_HEX
