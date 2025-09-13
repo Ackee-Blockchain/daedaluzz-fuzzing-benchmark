@@ -1,0 +1,24 @@
+FROM node:22-slim
+# hardhat require node +18
+
+# Install git for npm to clone GitHub dependencies
+RUN apt-get update && apt-get install -y git && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /daedaluzz
+
+# Pre-install Hardhat dependencies in a template directory
+RUN mkdir -p /hardhat-template && \
+    cd /hardhat-template && \
+    cat > package.json << 'EOF'
+{
+  "name": "hardhat-template",
+  "version": "1.0.0",
+  "type": "module",
+  "devDependencies": {
+    "forge-std": "github:foundry-rs/forge-std#v1.9.4",
+    "hardhat": "^3.0.6"
+  }
+}
+EOF
+
+RUN cd /hardhat-template && npm install

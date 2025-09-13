@@ -31,6 +31,8 @@ elif fuzzer_name == "ityfuzz":
     docker_image = "fuzzland/ityfuzz:v0.0.1"
 elif fuzzer_name == "wake":
     docker_image = "daedaluzz-wake"
+elif fuzzer_name == "hardhat":
+    docker_image = "daedaluzz-hardhat"
 time_limit = 28800
 include_raw_output = False
 maze_id_start = 0
@@ -151,6 +153,22 @@ def process_all_tasks(tasks):
                             f"{docker_image}",
                             f"{task_idx} {time_limit} {maze_id} {rnd_seed}",
                         ]
+                    elif fuzzer_name == "hardhat":
+                        wd = os.getcwd()
+                        exe = [
+                            "docker",
+                            "run",
+                            "--rm",
+                            "-i",
+                            f"--cpuset-cpus={core_id}",
+                            f"--memory={memory_limit}m",
+                            f"--memory-swap={memory_limit}m",
+                            f"--mount=type=bind,source={wd},target=/daedaluzz",
+                            "--workdir=/daedaluzz",
+                            '--entrypoint="./run-hardhat.sh"',
+                            f"{docker_image}",
+                            f"{task_idx} {time_limit} {maze_id} {rnd_seed}",
+                        ]
                     elif fuzzer_name == "hybrid-echidna":
                         wd = os.getcwd()
                         exe = [
@@ -224,6 +242,7 @@ def process_all_tasks(tasks):
                     or fuzzer_name == "wake"
                     or fuzzer_name == "hybrid-echidna"
                     or fuzzer_name == "ityfuzz"
+                    or fuzzer_name == "hardhat"
                 ):
                     proc = subprocess.Popen(
                         " ".join(exe),
@@ -284,6 +303,36 @@ def process_all_tasks(tasks):
                     numbers = [int(n) for n in re.findall(r'\d+', last_set)]
                     for num in numbers:
                         violations[str(num)] = duration
+            elif fuzzer_name == "hardhat":
+                duration = time.time_ns() - task["start-time"]
+                violations = dict({})
+                # Parse using timestamp same way as Foundry
+                timestamp_split_regex = re.compile(r"(\{\"\S+\"\: \d+})")
+                timestamp_regex = re.compile(r"\{\"\S+\"\: (\d+)}")
+                outs = timestamp_split_regex.split(fuzzer_output)
+                curr_timestamp = 0
+                start_timestamp = 0
+                num_outs = len(outs)
+                for out_idx, out in enumerate(outs):
+                    m = timestamp_regex.fullmatch(out)
+                    if m:
+                        new_timestamp = int(m[1])
+                        if curr_timestamp < 1:
+                            start_timestamp = new_timestamp
+                        curr_timestamp = new_timestamp
+                        continue
+                    dur = duration
+                    next_idx = out_idx + 1
+                    if next_idx < num_outs:
+                        next_out = outs[next_idx]
+                        m = timestamp_regex.fullmatch(next_out)
+                        if m:
+                            dur = int(m[1]) - start_timestamp
+                    # Look for "Error: N" patterns in Hardhat output
+                    ms = re.findall(r"Error:\s+(\d+)", out, flags=re.M)
+                    for m in ms:
+                        if not (m in violations):
+                            violations[m] = 1000000000 * dur
             elif fuzzer_name == "foundry":
                 duration = time.time_ns() - task["start-time"]
                 violations = dict({})
@@ -405,7 +454,7 @@ finally:
         proc.terminate()
         try:
             proc.wait(1)
-        except TimeoutExpired:
+        except subprocess.TimeoutExpired:
             proc.kill()
             continue
     write_output_file(tasks)
